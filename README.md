@@ -1,7 +1,7 @@
 # CLI-Pomodoro-Timer
 Pomodoro Timer with custom durations and messages for the CLI for MacOS.
 
-Using the built-in MacOS notifications to notify you when your time up.
+Using the built-in MacOS notifications to notify you when your time is up.
 
 To start the timer with default values use:
 `python3 pomodory.py` 
