@@ -17,15 +17,6 @@ def timer():
     pausetitle = "Pause"
     workmessage = "Time to work"
     pausemessage = "Time for a pause"
-    # if len(sys.argv[1:]):
-        # if sys.argv[1] == "--worktime":
-        #     worktime = float(sys.argv[2])
-        # if sys.argv[3] == "--shortbreak":
-        #     shortbreak = float(sys.argv[4])
-        # if sys.argv[5] == "--longbreak":
-        #     longbreak = float(sys.argv[6])
-        # if sys.argv[7] == "--longbreak":
-        #     longbreak = float(sys.argv[8])
     for arg in sys.argv:
         if arg == "--title" or arg == "-t":
             worktitle = sys.argv[sys.argv.index(arg)+1]
