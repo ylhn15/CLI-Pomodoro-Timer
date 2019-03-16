@@ -3,10 +3,12 @@ import os
 import sys
 
 def notify(title, text):
-    os.system("""
-              osascript -e 'display notification "{}" with title "{}"'
-              """.format(text, title))
-
+    if os.name is "Darwin":
+        os.system("""
+                  osascript -e 'display notification "{}" with title "{}"'
+                    """.format(text, title))
+    else: 
+        os.system('notify-send "{}" "{}"'.format(title, text))
 def timer():
     runtimes = 0
     worktime = 25
@@ -20,12 +22,12 @@ def timer():
     for arg in sys.argv:
         if arg == "--title" or arg == "-t":
             worktitle = sys.argv[sys.argv.index(arg)+1]
-            if sys.argv[sys.argv.index(arg)+2].find("-") is -1:
-                pausetitle = sys.argv[sys.argv.index(arg)+2]
+ #           if sys.argv[sys.argv.index(arg)+2].find("-") is -1:
+ #               pausetitle = sys.argv[sys.argv.index(arg)+2]
         if arg == "--message" or arg == "-m":
             workmessage = sys.argv[sys.argv.index(arg)+1]
-            if sys.argv[sys.argv.index(arg)+2].find("-") is -1:
-                pausemessage = sys.argv[sys.argv.index(arg)+2]
+ #           if sys.argv[sys.argv.index(arg)+2].find("-") is -1:
+ #               pausemessage = sys.argv[sys.argv.index(arg)+2]
         if arg == "--worktime" or arg == "-w":
             worktime = float(sys.argv[sys.argv.index(arg)+1])
         if arg == "--shortbreak" or arg == "-s":
@@ -42,9 +44,9 @@ def timer():
             lengthOfPauseInMinutes = shortbreak
         elif runtimes % interval is not 0:
             lengthOfPauseInMinutes = longbreak
-        notify(worktitle + " (" + str(worktime * 60) + ")", workmessage)
+        notify(worktitle + " (" + str(worktime) + "Minutes )", workmessage)
         sleep(worktime * 60)
-        notify(pausetitle + " (" + str(lengthOfPauseInMinutes) + ")", pausemessage)
+        notify(pausetitle + " (" + str(lengthOfPauseInMinutes) + "Minutes )", pausemessage)
         sleep(lengthOfPauseInMinutes * 60)
         runtimes = runtimes + 1
 timer()
